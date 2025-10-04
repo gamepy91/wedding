@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Balm & Game — Wedding Invitation</title>
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: High-contrast Serif + Ultralight Sans -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gold: #c6a664; /* Deep Champagne Gold */
+        --black: #0b0b0b; /* Matte Black */
+        --white: #ffffff; /* Crisp White */
+      }
+      html,
+      body {
+        background: var(--white);
+        color: var(--black);
+      }
+      .serif {
+        font-family: "Playfair Display", ui-serif, Georgia, "Times New Roman",
+          serif;
+      }
+      .sans {
+        font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI,
+          Roboto, "Helvetica Neue", Arial, "Noto Sans Thai", "Noto Sans",
+          sans-serif;
+      }
+
+      /* Hide Scrollbar */
+      ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+      html {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      /* Editorial spacing rhythm */
+      .section {
+        min-height: 100svh;
+      }
+
+      /* Reveal animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 1200ms ease, transform 1200ms ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hairline divider */
+      .hairline {
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        opacity: 0.5;
+      }
+
+      /* Gold accents */
+      .gold {
+        color: var(--gold);
+      }
+      .bg-gold {
+        background: var(--gold);
+      }
+      .border-gold {
+        border-color: var(--gold);
+      }
+
+      /* Buttons (visible on light + dark) */
+      .btn {
+        letter-spacing: 0.06em;
+      }
+      .btn-min {
+        padding: 0.75rem 1.25rem;
+        border-width: 1px;
+        border-color: var(--gold);
+        color: currentColor;
+      }
+      .btn-min:hover {
+        background: var(--gold);
+        color: var(--black);
+      }
+
+      /* Subtle fade overlay for imagery */
+      .fade-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.85) 65%,
+          rgba(255, 255, 255, 1) 100%
+        );
+      }
+
+      /* Optional audio control */
+      .audio-toggle {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--gold);
+        border-radius: 9999px;
+        display: grid;
+        place-items: center;
+      }
+      .audio-toggle[aria-pressed="true"] {
+        background: var(--gold);
+        color: var(--white);
+      }
+
+      /* Prevent text selection on hero to feel like a logotype */
+      .no-select {
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      /* Countdown numbers */
+      .count-num {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </head>
+  <body class="sans antialiased selection:bg-black selection:text-white">
+    <!-- Optional: Background music (muted by default per autoplay policies) -->
+    <audio id="bgm" loop muted>
+      <!-- Replace with your file: <source src="/assets/your-music.mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <!-- Discreet audio control (top-right, floating) -->
+    <div class="fixed right-5 top-5 z-50">
+      <button
+        id="audioBtn"
+        class="audio-toggle text-[11px] uppercase tracking-widest"
+        aria-pressed="false"
+        title="Toggle music"
+      >
+        ♪
+      </button>
+    </div>
+
+    <!-- I. GRAND OPENING -->
+    <section id="opening" class="section grid place-items-center">
+      <div class="text-center reveal space-y-8">
+        <div
+          class="serif no-select tracking-[0.12em] text-5xl sm:text-6xl md:text-7xl leading-none"
+        >
+          <span class="gold">Balm</span>
+          <span class="mx-3 text-black">&</span>
+          <span class="gold">Game</span>
+        </div>
+        <div
+          class="uppercase tracking-[0.35em] text-xs sm:text-sm text-neutral-600"
+        >
+          20 • December • 2025
+        </div>
+        <div class="hairline w-[160px] mx-auto"></div>
+        <!-- Countdown -->
+        <div
+          class="mt-6 flex items-center justify-center gap-6 text-neutral-800"
+          id="countdown"
+          aria-live="polite"
+        >
+          <!-- JS will populate here -->
+        </div>
+        <p class="text-neutral-500 text-xs sm:text-sm">Scroll to begin</p>
+      </div>
+    </section>
+
+    <!-- II. THE ANNOUNCEMENT -->
+    <section id="announcement" class="section grid place-items-center px-6">
+      <div class="max-w-3xl reveal text-center">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl leading-tight mb-8">
+          The Announcement
+        </h2>
+        <p class="text-base sm:text-lg leading-relaxed text-neutral-700">
+          With joyful hearts, we invite you to celebrate the wedding of
+          <span class="serif gold font-semibold">Balm (Thanatcha)</span>
+          and
+          <span class="serif gold font-semibold">Game (Supachok)</span>, as we
+          begin our next chapter together.
+        </p>
+        <p class="text-sm sm:text-base mt-8 text-neutral-600">
+          Your presence is the greatest honor on our special day.
+        </p>
+      </div>
+    </section>
+
+    <!-- Full-bleed editorial image (Pre-wedding) -->
+    <section class="relative section">
+      <!-- Replace the URL below with your pre-wedding image -->
+      <img
+        src="assets/FRF06655.jpg"
+        alt="Pre-wedding"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 fade-overlay"></div>
+      <div class="relative h-full w-full grid place-items-end">
+        <div class="px-6 pb-16 max-w-3xl w-full">
+          <p class="reveal text-neutral-700 text-sm sm:text-base"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- III. SCHEDULE & DETAILS -->
+    <section id="schedule" class="section flex items-center px-6">
+      <div class="max-w-4xl mx-auto w-full">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl mb-10 reveal">
+          Schedule & Details
+        </h2>
+        <div class="grid md:grid-cols-2 gap-10">
+          <div class="reveal space-y-6">
+            <div>
+              <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+                Date / Time
+              </div>
+              <div class="mt-2 text-lg sm:text-xl">
+                Saturday, 20 December 2025 — 6:00 PM
+              </div>
+            </div>
+            <div class="hairline"></div>
+            <div>
+              <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+                Venue
+              </div>
+              <div class="mt-2 text-lg sm:text-xl">
+                The Grand Ballroom — Chiang Mai Marriott Hotel
+              </div>
+              <div class="text-neutral-600 text-sm">
+                108 Changklan Rd, Chang Khlan Sub-district, Amphur Muang, Chiang
+                Mai
+              </div>
+            </div>
+            <div class="hairline"></div>
+            <div>
+              <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+                Theme & Dress Code
+              </div>
+              <div class="mt-2 text-lg sm:text-xl">
+                Starry Night —
+                <span class="text-neutral-600"
+                  >Guests are welcome to follow, but it’s not required.</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="reveal space-y-4">
+            <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+              Evening Flow
+            </div>
+            <ul class="space-y-3 text-neutral-800">
+              <li>18:00 — Doors open & Registration</li>
+              <li>18:30 — Dinner service begins</li>
+              <li>19:09 — Vows & Ring exchange</li>
+              <li>
+                20:00–21:00 — Celebration (Champagne, Bouquet toss, Thank-you)
+              </li>
+            </ul>
+            <p class="text-neutral-600 text-sm">*Times may adjust slightly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IV. VENUE IMAGE & MAP LINK -->
+    <section id="map" class="relative section">
+      <!-- Replace with actual venue ambiance shot -->
+      <img
+        src="assets/FRF06901.jpg"
+        alt="Venue"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-white/10"></div>
+      <div class="absolute bottom-6 right-6 z-10">
+        <a
+          href="https://maps.google.com/?q=Park+Hyatt+Bangkok"
+          target="_blank"
+          class="text-xs tracking-widest gold uppercase"
+          >View map & directions ↗</a
+        >
+      </div>
+    </section>
+
+    <!-- V. RSVP -->
+    <section
+      id="rsvp"
+      class="section grid place-items-center px-6 bg-[color:var(--black)] text-white"
+    >
+      <div class="max-w-3xl text-center reveal">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl mb-6">RSVP</h2>
+        <p class="text-neutral-300">
+          Kindly respond by <span class="gold">1 December 2025</span> so we can
+          reserve your seat and care for your experience.
+        </p>
+        <div class="mt-10">
+          <a
+            href="https://forms.gle/your-form"
+            target="_blank"
+            class="btn btn-min inline-block uppercase text-white"
+            >Confirm Your Attendance</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- VI. WISH / GIFTS -->
+    <section id="gift" class="section flex items-center px-6">
+      <div class="max-w-3xl mx-auto reveal text-center">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl mb-8">Our Wish</h2>
+        <p class="text-neutral-700 leading-relaxed">
+          Your presence is the most precious gift. If you wish to offer an
+          additional gift, please contact our coordinator below. Thank you for
+          your kindness.
+        </p>
+      </div>
+    </section>
+
+    <!-- VII. CONTACT & FINALE -->
+    <section id="contact" class="section grid place-items-center px-6">
+      <div class="max-w-3xl w-full text-center reveal space-y-10">
+        <div>
+          <h2 class="serif text-3xl sm:text-4xl md:text-5xl mb-4">Contact</h2>
+          <p class="text-neutral-700">
+            Coordinator A —
+            <a href="tel:+66999999999" class="gold">(+66) 99-999-9999</a>
+          </p>
+          <p class="text-neutral-700">
+            Line: <span class="gold">@wedding</span>
+          </p>
+        </div>
+        <div class="hairline"></div>
+        <div class="flex flex-col items-center gap-6">
+          <!-- Replace with a small elegant couple image or signature -->
+          <img
+            src="assets/FRF05931.jpg"
+            alt="Couple small"
+            class="w-36 h-36 object-cover rounded-full"
+          />
+          <p class="serif text-xl tracking-widest">With love and gratitude</p>
+          <p class="uppercase tracking-[0.35em] text-xs text-neutral-500">
+            Balm • Game
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // IntersectionObserver for reveal animations
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Audio toggle
+      const audio = document.getElementById("bgm");
+      const btn = document.getElementById("audioBtn");
+      btn.addEventListener("click", async () => {
+        const pressed = btn.getAttribute("aria-pressed") === "true";
+        btn.setAttribute("aria-pressed", String(!pressed));
+        if (audio.paused) {
+          try {
+            audio.muted = false;
+            await audio.play();
+          } catch (err) {
+            /* ignored */
+          }
+        } else {
+          audio.pause();
+        }
+      });
+
+      // Countdown to Dec 20, 2025, 18:00 (Bangkok time)
+      const target = new Date("2025-12-20T18:00:00+07:00").getTime();
+      const cd = document.getElementById("countdown");
+
+      function render(ms) {
+        if (ms <= 0) {
+          cd.innerHTML = '<span class="count-num">Today is the day ✨</span>';
+          return;
+        }
+        const s = Math.floor(ms / 1000);
+        const d = Math.floor(s / 86400);
+        const h = Math.floor((s % 86400) / 3600);
+        const m = Math.floor((s % 3600) / 60);
+        const sec = s % 60;
+        cd.innerHTML = `
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(d)}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Days</div>
+        </div>
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(
+            h
+          ).padStart(2, "0")}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Hours</div>
+        </div>
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(
+            m
+          ).padStart(2, "0")}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Minutes</div>
+        </div>
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(
+            sec
+          ).padStart(2, "0")}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Seconds</div>
+        </div>`;
+      }
+
+      render(target - Date.now());
+      setInterval(() => render(target - Date.now()), 1000);
+    </script>
+  </body>
+</html>

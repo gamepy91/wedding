@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Balm & Game — Wedding Invitation</title>
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: High-contrast Serif + Ultralight Sans -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@100;200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gold: #c6a664; /* Deep Champagne Gold */
+        --black: #0b0b0b; /* Matte Black */
+        --white: #ffffff; /* Crisp White */
+      }
+      html,
+      body {
+        background: var(--white);
+        color: var(--black);
+      }
+      .serif {
+        font-family: "Playfair Display", ui-serif, Georgia, "Times New Roman",
+          serif;
+      }
+      .sans {
+        font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI,
+          Roboto, "Helvetica Neue", Arial, "Noto Sans Thai", "Noto Sans",
+          sans-serif;
+      }
+
+      /* Hide Scrollbar */
+      ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+      html {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      /* Sections */
+      .section {
+        min-height: 100svh;
+      }
+
+      /* Reveal animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 1200ms ease, transform 1200ms ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Hairline divider */
+      .hairline {
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          var(--gold),
+          transparent
+        );
+        opacity: 0.5;
+      }
+
+      /* Gold accents */
+      .gold {
+        color: var(--gold);
+      }
+      .bg-gold {
+        background: var(--gold);
+      }
+      .border-gold {
+        border-color: var(--gold);
+      }
+
+      /* Buttons */
+      .btn {
+        letter-spacing: 0.06em;
+      }
+      .btn-min {
+        padding: 0.75rem 1.25rem;
+        border: 1px solid var(--gold);
+        color: var(--black);
+      }
+      .btn-min:hover {
+        background: var(--gold);
+        color: var(--black);
+      }
+      .btn-on-dark {
+        padding: 0.75rem 1.25rem;
+        border: 1px solid var(--gold);
+        color: #ffffff;
+      }
+      .btn-on-dark:hover {
+        background: var(--gold);
+        color: var(--black);
+      }
+
+      /* Subtle fade overlay for imagery */
+      .fade-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.85) 85%,
+          rgba(255, 255, 255, 1) 100%
+        );
+      }
+
+      /* Audio toggle */
+      .audio-toggle {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--gold);
+        border-radius: 9999px;
+        display: grid;
+        place-items: center;
+      }
+      .audio-toggle[aria-pressed="true"] {
+        background: var(--gold);
+        color: var(--white);
+      }
+
+      /* Prevent select on hero */
+      .no-select {
+        user-select: none;
+        -webkit-user-select: none;
+      }
+
+      /* Countdown */
+      .count-num {
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 0.08em;
+      }
+
+      /* Gallery helpers */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="sans antialiased selection:bg-black selection:text-white">
+    <!-- Optional: Background music -->
+    <audio id="bgm" loop muted>
+      <source src="assets/Dandelions.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Discreet audio control -->
+    <div class="fixed right-5 top-5 z-50">
+      <button
+        id="audioBtn"
+        class="w-10 h-10 rounded-full border border-[color:var(--gold)] bg-white text-[11px] uppercase tracking-widest transition-colors duration-300 hover:bg-[color:var(--gold)] hover:text-black audio-toggle"
+        aria-pressed="false"
+        title="Toggle music"
+      >
+        ♪
+      </button>
+    </div>
+
+    <!-- II. YOU'RE INVITED -->
+    <section
+      id="invited"
+      class="relative section flex items-center justify-center text-center text-white"
+    >
+      <!-- Background image -->
+      <img
+        src="assets/FRF06658.jpg"
+        alt="Pre-wedding Background"
+        class="absolute inset-0 w-full h-full object-cover object-[50%_75%] sm:object-[50%_80%] md:object-[50%_55%]"
+      />
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black/40"></div>
+
+      <!-- Text content -->
+      <div class="relative z-10 space-y-6">
+        <h1
+          class="serif text-4xl sm:text-6xl md:text-7xl tracking-[0.15em] text-[color:var(--gold)]"
+        >
+          You’re Invited
+        </h1>
+        <p
+          class="uppercase tracking-[0.35em] text-xs sm:text-sm text-neutral-200"
+        >
+          Balm & Game Wedding Celebration
+        </p>
+        <div class="hairline w-[160px] mx-auto opacity-70"></div>
+      </div>
+    </section>
+
+    <!-- I. GRAND OPENING -->
+    <section id="opening" class="section grid place-items-center">
+      <div class="text-center reveal space-y-8">
+        <!-- Title: fluid size + responsive spacing -->
+        <div
+          class="serif no-select leading-none text-[clamp(2.25rem,10vw,5rem)] /* xs → lg */ sm:text-[clamp(3rem,7vw,6rem)] tracking-[0.08em] sm:tracking-[0.12em]"
+        >
+          <span class="text-[#95654C] whitespace-nowrap">BALM</span>
+          <span class="mx-1 sm:mx-3 text-[#9A7B6C] font-[serif]">&</span>
+          <span class="text-[#95654C] whitespace-nowrap">GAME</span>
+        </div>
+
+        <!-- Date: tighten tracking on very small screens -->
+        <div
+          class="uppercase text-xs sm:text-sm text-neutral-600 tracking-[0.20em] sm:tracking-[0.35em]"
+        >
+          20 • December • 2025
+        </div>
+
+        <div class="hairline w-[160px] mx-auto"></div>
+
+        <!-- Countdown -->
+        <div
+          id="countdown"
+          class="mt-6 flex items-center justify-center gap-3 sm:gap-6 text-neutral-600"
+          aria-live="polite"
+        ></div>
+
+        <p class="text-neutral-400 text-xs sm:text-sm">Scroll to begin</p>
+      </div>
+    </section>
+
+    <!-- Full-bleed editorial image (Pre-wedding) -->
+    <section class="relative section">
+      <!-- Replace the URL below with your pre-wedding image -->
+      <img
+        src="assets/FRF06354.jpg"
+        alt="Pre-wedding"
+        class="absolute inset-0 w-full h-full object-cover object-[50%_80%]"
+      />
+      <div class="absolute inset-0 fade-overlay"></div>
+      <div class="relative h-full w-full grid place-items-end">
+        <div class="px-6 pb-16 max-w-3xl w-full">
+          <p class="reveal text-neutral-700 text-sm sm:text-base"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- III. ABOUT US -->
+    <section id="about" class="section grid place-items-center px-6">
+      <div class="max-w-3xl text-center">
+        <h2
+          class="serif text-3xl sm:text-4xl md:text-5xl leading-tight mb-8 reveal"
+        >
+          About Us
+        </h2>
+
+        <p class="text-base sm:text-lg leading-relaxed text-neutral-700 reveal">
+          Two paths became one:
+          <span class="serif gold">Balm (Thanatcha)</span> and
+          <span class="serif gold">Game (Supachok)</span>. Brought together by a
+          love so deep, we found more than just partners — we found our best
+          friend, our soulmate, and the warmest place we call home.
+        </p>
+
+        <p class="mt-6 text-sm sm:text-base italic gold reveal">
+          Seven years of love, starting 09.09.2018, have led us here. We’re
+          excited to embark on this new journey.
+        </p>
+
+        <p class="text-sm sm:text-base mt-8 text-neutral-600 reveal">
+          Your presence is the most meaningful gift. Let's celebrate our forever
+          together!
+        </p>
+      </div>
+    </section>
+
+    <!-- NEW II. HORIZONTAL GALLERY -->
+    <section id="gallery" class="section relative px-0">
+      <!-- soft edge gradients -->
+      <div
+        class="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-white to-transparent pointer-events-none"
+      ></div>
+      <div
+        class="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-white to-transparent pointer-events-none"
+      ></div>
+
+      <!-- Prev Button -->
+      <button
+        id="prevBtn"
+        class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/70 backdrop-blur border border-gold flex items-center justify-center text-black hover:bg-gold hover:text-white transition"
+        aria-label="Previous"
+      >
+        ‹
+      </button>
+
+      <!-- Next Button -->
+      <button
+        id="nextBtn"
+        class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/70 backdrop-blur border border-gold flex items-center justify-center text-black hover:bg-gold hover:text-white transition"
+        aria-label="Next"
+      >
+        ›
+      </button>
+
+      <div
+        id="galleryTrack"
+        class="h-full overflow-x-auto overflow-y-hidden no-scrollbar snap-x snap-mandatory scroll-smooth select-none"
+      >
+        <div class="h-full flex items-center gap-6 px-6">
+          <!-- Slide 1 -->
+          <figure
+            class="snap-center shrink-0 w-[85vw] md:w-[60vw] h-[70vh] relative"
+          >
+            <img
+              src="assets/IMG_6011.jpg"
+              alt="Gallery 1"
+              class="w-full h-full object-cover rounded-lg object-[50%_25%]"
+            />
+          </figure>
+
+          <!-- Slide 2 -->
+          <figure
+            class="snap-center shrink-0 w-[85vw] md:w-[60vw] h-[70vh] relative"
+          >
+            <img
+              src="assets/IMG_6010.jpg"
+              alt="Gallery 2"
+              class="w-full h-full object-cover rounded-lg object-[50%_70%]"
+            />
+          </figure>
+
+          <!-- Slide 3 -->
+          <figure
+            class="snap-center shrink-0 w-[85vw] md:w-[60vw] h-[70vh] relative"
+          >
+            <img
+              src="assets/g3.jpg"
+              alt="Gallery 3"
+              class="w-full h-full object-cover rounded-lg object-[50%_70%]"
+            />
+          </figure>
+
+          <!-- Slide 4 -->
+          <figure
+            class="snap-center shrink-0 w-[85vw] md:w-[60vw] h-[70vh] relative"
+          >
+            <img
+              src="assets/g4.jpg"
+              alt="Gallery 4"
+              class="w-full h-full object-cover rounded-lg object-[50%_60%]"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- IV. SCHEDULE & DETAILS -->
+    <section
+      id="schedule"
+      class="section flex items-center justify-center px-6 text-center"
+    >
+      <div class="max-w-4xl mx-auto w-full">
+        <h1 class="serif text-4xl sm:text-4xl md:text-4xl mb-10 reveal">
+          Schedule <span class="font-[serif]">&</span> Details
+        </h1>
+        <div class="space-y-10">
+          <div class="reveal space-y-6">
+            <!-- Date / Time -->
+            <div>
+              <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+                Date / Time
+              </div>
+              <div class="mt-2 text-lg sm:text-xl">
+                Saturday, 20 December 2025 — 18:00
+              </div>
+            </div>
+
+            <!-- Evening Flow -->
+            <div class="reveal space-y-6">
+              <div class="text-xs uppercase tracking-[0.25em] text-neutral-500">
+                Evening Flow
+              </div>
+              <ul
+                class="space-y-3 text-neutral-800 max-w-md mx-auto text-left pl-20"
+              >
+                <li class="grid grid-cols-[80px_1fr] gap-4">
+                  <span>18:00</span>
+                  <span>Registration & Welcome</span>
+                </li>
+                <li class="grid grid-cols-[80px_1fr] gap-4">
+                  <span>18:30</span>
+                  <span>Doors Open & Dinner Service</span>
+                </li>
+                <li class="grid grid-cols-[80px_1fr] gap-4">
+                  <span>19:09</span>
+                  <span>Vows & Ring exchange</span>
+                </li>
+                <li class="grid grid-cols-[80px_1fr] gap-4">
+                  <span>20:00</span>
+                  <span>Celebration</span>
+                </li>
+              </ul>
+              <p class="text-neutral-600 text-sm text-center">
+                *Times may adjust slightly.
+              </p>
+            </div>
+
+            <div class="hairline"></div>
+
+            <!-- Venue Location -->
+            <div
+              class="relative max-w-2xl reveal space-y-6 p-6 rounded-2xl backdrop-blur mx-auto"
+            >
+              <h2 class="serif text-4xl mb-1">Venue Location</h2>
+              <p class="text-neutral-800">
+                Our celebration will be held at
+                <span class="gold"
+                  >Chiang Mai Marriott Hotel — Plaii Ballroom 1st floor</span
+                >.
+              </p>
+              <div class="flex justify-center gap-4">
+                <a
+                  href="https://maps.google.com/?q=Chiang+Mai+Marriott+Hotel"
+                  target="_blank"
+                  class="btn-min inline-block uppercase"
+                >
+                  Open Google Maps
+                </a>
+              </div>
+              <p class="text-neutral-600 text-xs">
+                108 Changklan Rd, Chang Khlan Sub-district, Amphur Muang, Chiang
+                Mai
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW DRESS CODE SECTION -->
+    <section id="dresscode" class="py-20 px-6 text-center bg-white">
+      <div class="max-w-3xl mx-auto reveal space-y-6">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl">Dress Code</h2>
+
+        <!-- Circles -->
+        <div class="flex justify-center gap-6 mt-6">
+          <span
+            class="w-10 h-10 rounded-full border border-neutral-300"
+            style="background: #000000"
+            title="Black"
+          ></span>
+          <span
+            class="w-10 h-10 rounded-full border border-neutral-300"
+            style="background: #ffffff"
+            title="White"
+          ></span>
+          <span
+            class="w-10 h-10 rounded-full border border-neutral-300"
+            style="background: #c6a664"
+            title="Gold"
+          ></span>
+          <span
+            class="w-10 h-10 rounded-full border border-neutral-300"
+            style="background: #8e6048"
+            title="Brown"
+          ></span>
+          <span
+            class="w-10 h-10 rounded-full border border-neutral-300"
+            style="background: #d8cfc4"
+            title="Champagne"
+          ></span>
+        </div>
+
+        <!-- Note -->
+        <p class="text-neutral-600 text-sm mt-6">
+          Dress code colors are suggested but not required —
+          <span class="italic">please dress as you feel comfortable.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- NEW FULL IMAGE SECTION -->
+    <section class="relative">
+      <img
+        src="assets/S__85286915.jpg"
+        alt="Full Page"
+        class="w-full h-auto max-h-screen object-contain mx-auto"
+      />
+      <!-- overlay -->
+      <div class="absolute inset-0"></div>
+    </section>
+
+    <!-- VI. RSVP -->
+    <section
+      id="rsvp"
+      class="section grid place-items-center px-6 bg-[color:#191919] text-white"
+    >
+      <div class="max-w-3xl text-center reveal">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl mb-6">RSVP</h2>
+        <p class="text-neutral-300">
+          Kindly respond by <span class="gold">31 October 2025</span> so we can
+          reserve your seat and care for your experience.
+        </p>
+        <div class="mt-10">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdfaWvySpsTSOXmaT91tY0s-_vhwpAtsHFLlzaAwsTODsVVAQ/viewform?usp=sharing&ouid=103844764336835557984"
+            target="_blank"
+            class="btn-on-dark inline-block uppercase"
+            >Confirm Your Attendance</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW GALLERY SECTION (GRID STYLE) -->
+    <section id="gallery-grid" class="py-20 px-6 bg-white">
+      <div class="max-w-5xl mx-auto text-center space-y-10">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl mb-6">Our Moments</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <!-- Image 1 -->
+          <figure class="overflow-hidden rounded-lg">
+            <img
+              src="assets/m1.jpg"
+              alt="Gallery Grid 1"
+              class="w-full h-[300px] object-cover hover:scale-105 transition duration-700"
+            />
+          </figure>
+
+          <!-- Image 2 -->
+          <figure class="overflow-hidden rounded-lg">
+            <img
+              src="assets/m2.jpg"
+              alt="Gallery Grid 2"
+              class="w-full h-[300px] object-cover hover:scale-105 transition duration-700"
+            />
+          </figure>
+
+          <!-- Image 3 -->
+          <figure class="overflow-hidden rounded-lg">
+            <img
+              src="assets/m3.jpg"
+              alt="Gallery Grid 3"
+              class="w-full h-[300px] object-cover hover:scale-105 transition duration-700"
+            />
+          </figure>
+
+          <!-- Image 4 -->
+          <figure class="overflow-hidden rounded-lg">
+            <img
+              src="assets/m4.jpg"
+              alt="Gallery Grid 4"
+              class="w-full h-[300px] object-cover hover:scale-105 transition duration-700"
+            />
+          </figure>
+        </div>
+
+        <p class="text-neutral-600 text-sm mt-6">
+          A glimpse of our journey — timeless moments captured forever.
+        </p>
+      </div>
+    </section>
+
+    <!-- VIII. CONTACT & FINALE -->
+    <section id="contact" class="section grid place-items-center px-6">
+      <div class="max-w-4xl w-full text-center reveal space-y-10">
+        <h2 class="serif text-3xl sm:text-4xl md:text-5xl mb-4">Contact</h2>
+
+        <!-- Contacts in 2 columns -->
+        <div class="grid md:grid-cols-2 gap-10">
+          <!-- Person 1 -->
+          <div class="flex flex-col items-center space-y-3">
+            <img
+              src="assets/contact_b.jpg"
+              alt="Balm"
+              class="w-32 h-32 object-cover rounded-full"
+            />
+            <p class="text-neutral-700 font-semibold">Balm (Thanatcha)</p>
+            <p class="text-neutral-700">
+              Tel —
+              <a href="tel:+66999414429" class="gold">098-9414429</a>
+            </p>
+          </div>
+
+          <!-- Person 2 -->
+          <div class="flex flex-col items-center space-y-3">
+            <img
+              src="assets/contact_g.jpg"
+              alt="Game"
+              class="w-32 h-32 object-cover rounded-full"
+            />
+            <p class="text-neutral-700 font-semibold">Game (Supachok)</p>
+            <p class="text-neutral-700">
+              Tel —
+              <a href="tel:+66988941555" class="gold">098-8941555</a>
+            </p>
+          </div>
+        </div>
+
+        <div class="hairline"></div>
+
+        <!-- Finale -->
+        <div class="flex flex-col items-center gap-6">
+          <p class="serif text-xl tracking-widest">With love and gratitude</p>
+          <p class="uppercase tracking-[0.35em] text-xs text-neutral-500">
+            Balm • Game
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Reveal animations
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("in");
+          });
+        },
+        { threshold: 0.15 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // Audio toggle
+      const audio = document.getElementById("bgm");
+      const btn = document.getElementById("audioBtn");
+      btn.addEventListener("click", async () => {
+        const pressed = btn.getAttribute("aria-pressed") === "true";
+        btn.setAttribute("aria-pressed", String(!pressed));
+        if (audio.paused) {
+          try {
+            audio.muted = false;
+            await audio.play();
+          } catch (err) {}
+        } else {
+          audio.pause();
+        }
+      });
+
+      // Countdown (Dec 20, 2025, 18:00 Bangkok)
+      const target = new Date("2025-12-20T18:00:00+07:00").getTime();
+      const cd = document.getElementById("countdown");
+      function render(ms) {
+        if (ms <= 0) {
+          cd.innerHTML = '<span class="count-num">Today is the day ✨</span>';
+          return;
+        }
+        const s = Math.floor(ms / 1000);
+        const d = Math.floor(s / 86400);
+        const h = Math.floor((s % 86400) / 3600);
+        const m = Math.floor((s % 3600) / 60);
+        const sec = s % 60;
+        cd.innerHTML = `
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(d)}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Days</div>
+        </div>
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(
+            h
+          ).padStart(2, "0")}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Hours</div>
+        </div>
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(
+            m
+          ).padStart(2, "0")}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Minutes</div>
+        </div>
+        <div class="text-center">
+          <div class="serif text-3xl sm:text-4xl count-num">${String(
+            sec
+          ).padStart(2, "0")}</div>
+          <div class="uppercase text-[10px] tracking-[0.25em] text-neutral-500">Seconds</div>
+        </div>`;
+      }
+      render(target - Date.now());
+      setInterval(() => render(target - Date.now()), 1000);
+    </script>
+
+    <script>
+      // --- HORIZONTAL GALLERY AUTOPLAY (safe) ---
+      const galSection = document.getElementById("gallery");
+      const galTrack = document.getElementById("galleryTrack");
+      const galSlides = galTrack ? galTrack.querySelectorAll("figure") : [];
+      let galIndex = 0;
+      let galTimer = null;
+      const GAL_INTERVAL_MS = 2000; // ปรับความเร็วได้ เช่น 3000 = 3 วินาที
+
+      function gotoSlide(i) {
+        if (!galSlides.length) return;
+        galIndex = (i + galSlides.length) % galSlides.length;
+        const slide = galSlides[galIndex];
+        galTrack.scrollTo({
+          left: slide.offsetLeft,
+          behavior: "smooth",
+        });
+      }
+
+      function startAuto() {
+        if (galTimer || !galSlides.length) return;
+        galTimer = setInterval(() => gotoSlide(galIndex + 1), GAL_INTERVAL_MS);
+      }
+      function stopAuto() {
+        if (!galTimer) return;
+        clearInterval(galTimer);
+        galTimer = null;
+      }
+
+      // ปุ่ม Prev/Next
+      document.getElementById("prevBtn")?.addEventListener("click", () => {
+        stopAuto();
+        gotoSlide(galIndex - 1);
+      });
+      document.getElementById("nextBtn")?.addEventListener("click", () => {
+        stopAuto();
+        gotoSlide(galIndex + 1);
+      });
+
+      // เล่นเฉพาะตอน section โผล่ในจอ (กันเด้งกลับ)
+      if ("IntersectionObserver" in window && galSection) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) startAuto();
+              else stopAuto();
+            });
+          },
+          { threshold: 0.6 }
+        );
+        io.observe(galSection);
+      } else {
+        startAuto();
+      }
+
+      // หยุดอัตโนมัติเมื่อผู้ใช้แตะ/เลื่อน
+      ["pointerdown", "wheel", "touchstart", "keydown"].forEach((ev) => {
+        galTrack.addEventListener(
+          ev,
+          () => {
+            stopAuto();
+            setTimeout(() => {
+              const rect = galSection.getBoundingClientRect();
+              const inView = rect.top < window.innerHeight && rect.bottom > 0;
+              if (inView) startAuto();
+            }, 5000);
+          },
+          { passive: true }
+        );
+      });
+    </script>
+  </body>
+</html>
